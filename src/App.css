@@ -1,0 +1,89 @@
+#root {
+  background-color: #c5832c;
+ width: 100%;
+ text-align: center;
+}
+.title{
+  border-radius: 60px;
+  background-color: #2d7d88;
+  color: #e9e7e7;
+  box-shadow: 1px 1px 3px 2px #363535;
+}
+.inputs{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+main{
+  margin: 2%;
+}
+
+.cards {
+  display: flex;
+  flex-direction: row;
+  background-color: #cad3cdb9;
+  color: #e9e7e7;
+  box-shadow: 1px 1px 3px 2px #494747;
+  height: 130px;
+  justify-content: space-evenly;
+  
+}
+.card{
+  width: 200px;
+  border: solid 7px #ff000000;
+  margin: auto;
+  box-shadow: #4b4646 1px 2px 4px 3px;
+  height: 110px;
+}
+.entrada {
+  background-color: #4d2cc5;
+text-align: center;
+
+}
+.saida{
+  background-color: #c52c2c;
+  text-align: center;
+}
+.total{
+  background-color: #2cb1c5;
+  text-align: center;
+}
+.form{
+  display: flex;
+  flex-direction: column;
+  padding: 3px;
+  
+  align-items: center;
+  border: none;
+}
+.boxinput{
+  background-color: #108f1ad0;
+  justify-content: space-between;
+  margin: auto;
+  box-shadow: #575353 2px 2px 4px 3px;
+  box-sizing: border-box;
+}
+.ipt{
+  height: 40px;
+  margin: 2px;
+  box-shadow: #575353 2px 2px 4px 3px;
+  padding: 3px;
+  
+}
+.ckb{
+width: 99px;
+height: 32px;
+border-radius: 50%;
+
+  
+}
+label{
+  color: #e9e7e7;
+  font-size: larger;
+  font-weight: 600;
+  flex-wrap: wrap;
+ align-items: center;
+ justify-content: center;
+ text-align:center;
+
+} 
