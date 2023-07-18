@@ -1,10 +1,38 @@
 
+
 import './App.css'
-import Inputs from './components/inputs'
+import { useState } from 'react'
+// import DataTable from './components/DataTable'
 
 function App() {
-  
+  //Campos iniciados
+ const [dataInput, setDataInput]= useState([])
+ const [dataOuput, setDataOutput]= useState([])
+ const [inputValue,setInputValue]=useState('')
+ const [outputValue,setOutputValue]=useState('')
+ const [selectTable, setSelectTable]=useState('')
 
+ const handleInputChange= (e)=>{
+  setInputValue(e.target.value)
+  console.log(inputValue)
+ }
+ const handleOutputChange= (e)=>{
+  setInputValue(e.target.value)
+ }
+
+
+ const handleAddData=()=>{
+ if(selectTable==='input'){
+  setDataInput([...dataInput,inputValue])
+ }else if(selectTable==='output'){
+  setDataOutput([...dataOuput,outputValue])
+ }
+ setInputValue('')
+ setOutputValue('')
+
+ 
+
+ }
   return (
     <>
 
@@ -14,26 +42,43 @@ function App() {
      <h1 className='title'>Fluxo de Caixa </h1>
 
      <div className="inputs">
-      <Inputs/>  
+     <div className="form">
+                <div className="boxinput">
+                    <input className="ipt lcm" type="text" name="input" placeholder="Lançamento" 
+                      onChange={handleInputChange}/>
+                </div> 
+
+                <div className="boxinput">
+                    <input className="ipt vlr" type="number" name="valor" placeholder="Valor" 
+                      onChange={handleOutputChange}/>
+                </div> 
+
+                <input type="checkbox" name="select" id="" onChange={setSelectTable}/>
+
+            </div>
+
+     <button onClick={handleAddData}>Adicionar</button>
      </div>
 
      <main>
       <div className="main">
         <div className="cards">
-          <div className="card entrada">
-            <h2 className="card-title">Entradas</h2>
-            <p className='titulo post'>Valor (1554151515)</p>
-   
+            
+            <div className="card entrada">
+            <h2 htmlFor="inuput">Entrada</h2>
+              
+                <p className='titulo post' >Valor{}</p>
           </div>
-
+         
           <div className="card saida">
-            <h2 className="card-title">Saida</h2>
-            <p className='titulo post'>Valor (1554151515)</p>
+          <h2 htmlFor="output">Saida</h2>
+            
+            <p className='titulo post'>Valor {}</p>
    
           </div>
           <div className="card total">
-            <h2 className="card-title">Total</h2>
-            <p className='titulo post'>Valor (1554151515)</p>
+          <h2 htmlFor="res">Total</h2>
+            <p className='titulo post'>Valor {}</p>
    
           </div>
         </div>
@@ -41,7 +86,48 @@ function App() {
 
       <div className="dashboard">
         <h1>Balanço Geral</h1>
+        <table border="1">
+        {selectTable==='input' &&(
+      <table>
+        <thead>
+          <tr>
+            <th> Entradas</th>
+          </tr>
+        </thead>
+        <tbody>
+          {dataInput.map((item,index)=>(
+            <tr key={index}>
+              <td>
+                {item}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+     )}
+
+{selectTable==='output' &&(
+      <table>
+        <thead>
+          <tr>
+            <th> Saidas</th>
+          </tr>
+        </thead>
+        <tbody>
+          {dataOuput.map((item,index)=>(
+            <tr key={index}>
+              <td>
+                {item}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+     )}
+
+        </table>
       </div>
+          
      </main>
     </>
   )
