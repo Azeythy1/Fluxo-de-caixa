@@ -11,7 +11,8 @@ function App() {
  const [inputValue,setInputValue]=useState('')
  const [outputValue,setOutputValue]=useState('')
  const [selectTable, setSelectTable]=useState('')
-
+/*acredito que  falta um if para selecionar se osdadosserão para entrada ou saida 
+e salvar na tabela dasboard*/
  const handleInputChange= (e)=>{
   setInputValue(e.target.value)
   console.log(inputValue)
@@ -89,7 +90,7 @@ function App() {
       <div className="dashboard">
         <h1>Balanço Geral</h1>
         <table border="1">
-        {selectTable==='input' &&(
+        {selectTable===true &&(
       <table>
         <thead>
           <tr>
@@ -108,7 +109,7 @@ function App() {
       </table>
      )}
 
-{selectTable==='output' &&(
+{selectTable===false &&(
       <table>
         <thead>
           <tr>
