@@ -21,14 +21,16 @@ function App() {
  }
 
 
- const handleAddData=()=>{
- if(selectTable==='input'){
+ const handleAddData=(e)=>{
+  e.preventDefault()
+
+ if(selectTable===true){
   setDataInput([...dataInput,inputValue])
- }else if(selectTable==='output'){
+ }else if(selectTable===false){
   setDataOutput([...dataOuput,outputValue])
  }
- setInputValue('')
- setOutputValue('')
+//  setInputValue('')
+//  setOutputValue('')
 
  
 
@@ -53,7 +55,7 @@ function App() {
                       onChange={handleOutputChange}/>
                 </div> 
 
-                <input type="checkbox" name="select" id="" onChange={setSelectTable}/>
+                <input type="checkbox" name="select" id="" onChange={setSelectTable}/>Entrada
 
             </div>
 
@@ -67,18 +69,18 @@ function App() {
             <div className="card entrada">
             <h2 htmlFor="inuput">Entrada</h2>
               
-                <p className='titulo post' >Valor{}</p>
+                <p className='titulo post' >{inputValue}</p>
           </div>
          
           <div className="card saida">
           <h2 htmlFor="output">Saida</h2>
             
-            <p className='titulo post'>Valor {}</p>
+            <p className='titulo post'>Valor {outputValue}</p>
    
           </div>
           <div className="card total">
           <h2 htmlFor="res">Total</h2>
-            <p className='titulo post'>Valor {}</p>
+            <p className='titulo post'>Valor {inputValue-outputValue}</p>
    
           </div>
         </div>
