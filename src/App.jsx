@@ -6,36 +6,70 @@ import { useState } from 'react'
 
 function App() {
   //Campos iniciados
- const [dataInput, setDataInput]= useState([])
- const [dataOuput, setDataOutput]= useState([])
- const [inputValue,setInputValue]=useState('')
- const [outputValue,setOutputValue]=useState('')
- const [selectTable, setSelectTable]=useState('')
+ const [dataInput, setDataInput]= useState([  
+ ])
+ const [entrada, setEntrada]=useState()
+ const [saida, setSaida]=useState()
+ const [nome,setNome] = useState('')
+const [valor,setValor] = useState("")
+const [checkBox,setCheckBox] = useState(false);
+
 /*acredito que  falta um if para selecionar se osdadosserão para entrada ou saida 
 e salvar na tabela dasboard*/
- const handleInputChange= (e)=>{
-  setInputValue(e.target.value)
-  console.log(inputValue)
- }
- const handleOutputChange= (e)=>{
-  setInputValue(e.target.value)
- }
 
 
- const handleAddData=(e)=>{
-  e.preventDefault()
+// get value input 
+function nomeEntrada(e) {
+  setNome(e.target.value)
+}
 
- if(selectTable===true){
-  setDataInput([...dataInput,inputValue])
- }else if(selectTable===false){
-  setDataOutput([...dataOuput,outputValue])
- }
-//  setInputValue('')
-//  setOutputValue('')
+function valorEntrada(e) {
+  setValor(e.target.value)
+}
 
- 
+function checkBoxEntrada(e) {
+  setCheckBox(e.target.checked)
+}
 
- }
+
+
+
+function teste() {
+
+  const data = {
+    nome: nome,
+    valor: valor,
+    saida: !checkBox,
+  }
+
+  const newData = [...dataInput, data];
+
+  setDataInput(newData)
+
+
+
+  var entrada = 0;
+  var saida = 0;
+
+  for (var i = 0; i < newData.length; i++) {
+    if (newData[i].saida === false) {
+      entrada += Number(newData[i].valor);
+    } else {
+      saida += Number(newData[i].valor);
+    }
+  }
+
+
+  setEntrada(entrada)
+  setSaida(saida)
+
+  setNome('')
+  setValor('')
+  setCheckBox(false)
+}
+
+
+
   return (
     <>
 
@@ -47,20 +81,22 @@ e salvar na tabela dasboard*/
      <div className="inputs">
      <div className="form">
                 <div className="boxinput">
-                    <input className="ipt lcm" type="text" name="input" placeholder="Lançamento" 
-                      onChange={handleInputChange}/>
+                    <input className="ipt lcm" type="text" name="input" placeholder="Nome" 
+                    value={nome}
+                      onChange={nomeEntrada}/>
                 </div> 
 
                 <div className="boxinput">
                     <input className="ipt vlr" type="number" name="valor" placeholder="Valor" 
-                      onChange={handleOutputChange}/>
+                    value={valor}
+                      onChange={valorEntrada}/>
                 </div> 
 
-                <input type="checkbox" name="select" id="" onChange={setSelectTable}/>Entrada
+                <input type="checkbox" name="select" id="" onChange={checkBoxEntrada} value={checkBox}/>Entrada
 
             </div>
 
-     <button onClick={handleAddData}>Adicionar</button>
+     <button onClick={teste}>Adicionar</button>
      </div>
 
      <main>
@@ -69,19 +105,18 @@ e salvar na tabela dasboard*/
             
             <div className="card entrada">
             <h2 htmlFor="inuput">Entrada</h2>
-              
-                <p className='titulo post' >{inputValue}</p>
+                <p className='titulo post' >{entrada}</p>
           </div>
          
           <div className="card saida">
           <h2 htmlFor="output">Saida</h2>
             
-            <p className='titulo post'>Valor {outputValue}</p>
+            <p className='titulo post'>Valor {saida}</p>
    
           </div>
           <div className="card total">
           <h2 htmlFor="res">Total</h2>
-            <p className='titulo post'>Valor {inputValue-outputValue}</p>
+            <p className='titulo post'>Valor {entrada-saida}</p>
    
           </div>
         </div>
@@ -89,46 +124,36 @@ e salvar na tabela dasboard*/
 
       <div className="dashboard">
         <h1>Balanço Geral</h1>
-        <table border="1">
-        {selectTable===true &&(
+
+       
       <table>
         <thead>
           <tr>
-            <th> Entradas</th>
+            <th> Nome</th>
+            <th> Valor</th>
+            <th> Movimento</th>
+
           </tr>
+
         </thead>
         <tbody>
           {dataInput.map((item,index)=>(
             <tr key={index}>
               <td>
-                {item}
+                {item.nome}
               </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-     )}
-
-{selectTable===false &&(
-      <table>
-        <thead>
-          <tr>
-            <th> Saidas</th>
-          </tr>
-        </thead>
-        <tbody>
-          {dataOuput.map((item,index)=>(
-            <tr key={index}>
               <td>
-                {item}
+                {item.valor}
+              </td>
+              <td>
+                {item.saida ? "saida" : "entrada"}
               </td>
             </tr>
           ))}
         </tbody>
       </table>
-     )}
 
-        </table>
+
       </div>
           
      </main>
