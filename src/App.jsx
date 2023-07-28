@@ -87,12 +87,29 @@ function teste() {
                 </div> 
 
                 <div className="boxinput">
-                    <input className="ipt vlr" type="number" name="valor" placeholder="Valor" 
+                    <input className="ipt vlr" 
+                    type="number" 
+                    name="valor" placeholder="Valor" 
                     value={valor}
                       onChange={valorEntrada}/>
                 </div> 
+              <div className='container'>
+               <label className='switch'>
+                <span className='switchText'>Entrada</span>
+                <div className='switchWapper'>
 
-                <input type="checkbox" name="select" id="" onChange={checkBoxEntrada} value={checkBox}/>Entrada
+                 <input type="checkbox" 
+                name="select" 
+                className="checkBox" 
+                id="ckb" 
+                onChange={checkBoxEntrada} 
+                value={checkBox}/>
+                <span className='switchButton'></span>
+                </div>
+                  <span className='switchText'>Saida</span>
+                </label> 
+              </div>
+                
 
             </div>
 
@@ -111,12 +128,12 @@ function teste() {
           <div className="card saida">
           <h2 htmlFor="output">Saida</h2>
             
-            <p className='titulo post'>Valor {saida}</p>
+            <p className='titulo post'>{saida}</p>
    
           </div>
           <div className="card total">
           <h2 htmlFor="res">Total</h2>
-            <p className='titulo post'>Valor {entrada-saida}</p>
+            <p className='titulo post'> {entrada-saida}</p>
    
           </div>
         </div>
@@ -126,19 +143,26 @@ function teste() {
         <h1>Balanço Geral</h1>
 
        
-      <table>
+      <table border="1" className='table'>
         <thead>
           <tr>
-            <th> Nome</th>
+            <th>ID</th>
+            <th>Data</th>
+            <th> Lançamento</th>
             <th> Valor</th>
             <th> Movimento</th>
-
           </tr>
 
         </thead>
         <tbody>
           {dataInput.map((item,index)=>(
             <tr key={index}>
+               <td>
+                {item.id=Math.floor(index++)}
+              </td>
+              <td>
+                {item.data=Date()}
+              </td>
               <td>
                 {item.nome}
               </td>
