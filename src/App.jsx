@@ -1,18 +1,29 @@
-
+import axios from 'axios';
 
 import './App.css'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 // import DataTable from './components/DataTable'
 
 function App() {
   //Campos iniciados
- const [dataInput, setDataInput]= useState([  
- ])
+ const [dataInput, setDataInput]= useState([])
  const [entrada, setEntrada]=useState()
  const [saida, setSaida]=useState()
  const [nome,setNome] = useState('')
 const [valor,setValor] = useState("")
 const [checkBox,setCheckBox] = useState(false);
+
+// Back end em php
+// eslint-disable-next-line no-unused-vars
+const [dados, setDados] = useState([])
+useEffect(()=>{
+axios.get('http://localhost/api_caixa')
+.then(function(res){
+  setDados(res.data);
+})
+},[])
+
+
 
 /*acredito que  falta um if para selecionar se osdadosserão para entrada ou saida 
 e salvar na tabela dasboard*/
@@ -37,6 +48,8 @@ function checkBoxEntrada(e) {
 function teste() {
 
   const data = {
+    id:0,
+    data:'0',
     nome: nome,
     valor: valor,
     saida: !checkBox,
@@ -146,11 +159,11 @@ function teste() {
       <table border="1" className='table'>
         <thead>
           <tr>
-            <th>ID</th>
-            <th>Data</th>
-            <th> Lançamento</th>
-            <th> Valor</th>
-            <th> Movimento</th>
+            <th> ID </th>
+            <th> Data </th>
+            <th> Lançamento </th>
+            <th> Valor </th>
+            <th> Movimento </th>
           </tr>
 
         </thead>
